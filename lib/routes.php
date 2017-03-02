@@ -1,4 +1,8 @@
 <?php
+namespace KirbyPluginInstaller;
+use f;
+use dir;
+use c;
 
 function fetch_something($url) {
 	echo $url;
@@ -43,16 +47,19 @@ kirby()->routes(array(
 	array(
 		'pattern' => 'plugin-installer/install/(:all)',
 		'action'  => function($uri) {
-			if(!str::startsWith($uri, 'github.com/')) return;
-			$parts = explode('/', $uri);
-			$repo_name = end($parts);
-			$repo_path = kirby()->roots()->plugins() . DS . $repo_name;
-			$url = 'https://' . $uri . '/archive/master.zip';
-			$content = fetch_something($url);
-			f::write(kirby()->roots()->plugins() . DS . 'plugin.zip', $content);
-			unzip(kirby()->roots()->plugins() . DS . 'plugin.zip');
-			rename($repo_path . '-master', $repo_path);
-			go(kirby()->urls()->index() . '/panel/');
+			$Install = new Install();
+			if($Install->plugin($uri)) {
+				go(kirby()->urls()->index() . '/' . c::get('plugin.installer.panel', 'panel') . '/');
+			} else {
+				die('Could not install plugin!');
+			}
+		}
+	),
+	array(
+		'pattern' => 'plugin-installer/delete/(:any)',
+		'action'  => function($folder) {
+			$Delete = new Delete();
+			$Delete->run($folder);
 		}
 	)
 ));
