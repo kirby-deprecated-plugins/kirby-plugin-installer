@@ -1,10 +1,10 @@
 # Kirby Plugin Installer
 
-*Version 0.1*
+*Version 0.2*
 
 **WARNING:** By using actions to change your plugins, you risk to break your site or the Panel. To restrict the widget to a username, see [options](#options).
 
-![](docs/animation.gif)
+![](docs/screenshot.png)
 
 **Features**
 
