@@ -7,13 +7,13 @@ use str;
 
 class Delete {
 	function folder($folder) {
-		if(!$this->allowed()) return;
-		return $this->delete();
+		if(!$this->allowed($folder)) return;
+		return $this->delete($folder);
 	}
 
 	function run($folder) {
 		if($this->folder($folder)) {
-			go(kirby()->urls()->index() . '/' . c::get('plugin.installer.panel', 'panel') . '/');
+			go(kirby()->urls()->index() . '/' . c::get('plugin.installer.panel.uri', 'panel') . '/?pi=delete-success');
 		} else {
 			die('Could not delete folder!');
 		}
@@ -25,7 +25,7 @@ class Delete {
 		return dir::remove($path);
 	}
 
-	function allowed() {
+	function allowed($folder) {
 		if(empty($folder)) return;
 		if(str::contains($folder, '.')) return;
 		if(str::contains($folder, DS)) return;
