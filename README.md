@@ -2,6 +2,8 @@
 
 *Version 0.1*
 
+**WARNING:** By using actions to change your plugins, you risk to break your site or the Panel. To restrict the widget to a username, see [options](#options).
+
 ![](docs/animation.gif)
 
 **Features**
