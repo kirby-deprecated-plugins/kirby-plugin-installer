@@ -15,6 +15,8 @@
 - **Install**, **update**, **delete** and **deactivate** plugins.
 - Everything is done with the widget.
 - Visit plugin Github repository link.
+- It will warn if the file does not match the folder, or the plugin type is wrong.
+- Possible to restrict permission to only super admin users.
 
 **[Installation instructions](docs/install.md)**
 
