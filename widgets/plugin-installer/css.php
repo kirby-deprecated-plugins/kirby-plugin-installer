@@ -21,7 +21,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-right: 1em;
+	margin-right: .5em;
+	margin-left: .5em;
 }
 .pi-icon .icon {
 	top: 0;
@@ -38,30 +39,46 @@
 	list-style: none;
 }
 
+.pi-list li:nth-child(even) {
+	background: #fafafa;
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+
+.pi-version {
+	color: #777;
+	font-size: .75em;
+	display: inline-block;
+	margin-left: .25em;
+	vertical-align: baseline;
+}
+
+.pi-version:before {
+	content: '(';
+}
+
+.pi-version:after {
+	content: ')';
+}
+
 .pi-row {
 	display: flex;
 	width: 100%;
 	align-items: center;
 	padding: .25em 0 .25em 0;
-	cursor: pointer;
-	user-select: none;
 }
 
 .pi-name {
 	flex: 1;
 }
 
-.pi-actions {
-	display: none;
-	margin-bottom: 1em;
-	margin-top: .25em;
-}
-
 .pi-actions .btn {
-	padding: .25em 1em;
-	background: #eee;
+	padding: .25em 0;
 	border-radius: 0;
 	border-style: none;
+	width: 2em;
+	text-align: center;
+	border-radius: 5px;
 }
 
 .pi-actions .icon {
@@ -70,6 +87,10 @@
 
 .pi-actions .btn-repo {
 	border-color: #0366d6;
+	color: #0366d6;
+}
+
+.pi-name a {
 	color: #0366d6;
 }
 
@@ -91,7 +112,11 @@
 	background: #b3000a !important;
 }
 
-.pi-disabled {
+.pi-actions .pi-btn-disabled:hover {
+	background: none !important;
+}
+
+.pi-disabled .pi-name {
 	opacity: .5;
 	font-style: italic;
 }

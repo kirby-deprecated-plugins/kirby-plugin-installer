@@ -41,6 +41,10 @@ If you don't use the default panel uri `panel` you, need to change this value.
 
 ## Changelog
 
+**0.2**
+
+- Updated UI.
+
 **0.1**
 
 - Initial release 

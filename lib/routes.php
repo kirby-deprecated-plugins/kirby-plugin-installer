@@ -27,7 +27,9 @@ if(allow()) {
 			'pattern' => 'plugin-installer/delete/(:any)',
 			'action'  => function($folder) {
 				$Delete = new Delete();
-				$Delete->run($folder);
+				if($Delete->folder($folder)) {
+					go(kirby()->urls()->index() . '/' . c::get('plugin.installer.panel.uri', 'panel') . '/?pi=delete-success');
+				}
 			}
 		),
 		array(

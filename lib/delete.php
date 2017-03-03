@@ -11,14 +11,6 @@ class Delete {
 		return $this->delete($folder);
 	}
 
-	function run($folder) {
-		if($this->folder($folder)) {
-			go(kirby()->urls()->index() . '/' . c::get('plugin.installer.panel.uri', 'panel') . '/?pi=delete-success');
-		} else {
-			die('Could not delete folder!');
-		}
-	}
-
 	function delete($folder) {
 		$path = kirby()->roots()->plugins() . DS . $folder;
 		if(!f::exists($path)) return true;

@@ -1,8 +1,8 @@
 {
   "name": "kirby-plugin-installer",
-  "description": "Kirby CMS custom logic field",
+  "description": "Kirby CMS plugin installer",
   "author": "Jens Törnell <jens.tornell@gmail.com>",
-  "version": "0.1",
+  "version": "0.2",
   "type": "kirby-plugin",
   "license": "MIT"
 }

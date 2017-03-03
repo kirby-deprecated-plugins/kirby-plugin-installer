@@ -11,15 +11,6 @@ $( document ).ready(function() {
 		}
 	});
 
-	$('.pi-row').on('click', function() {
-		$('.pi-actions').not($(this).next()).hide();
-		if($(this).next().is(':visible')) {
-			$(this).next().hide();
-		} else {
-			$(this).next().show();
-		}
-	});
-
 	$('#plugin-installer-url').on('keyup', function (e) {
 		if(e.keyCode == 13) {
 			window.location.href = $('#plugin-installer-link').attr('href');

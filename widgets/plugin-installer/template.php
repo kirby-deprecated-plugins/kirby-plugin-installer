@@ -18,19 +18,17 @@ var base = '<?php echo u('plugin-installer/install/'); ?>';
 	$folders = glob(kirby()->roots()->plugins() . DS . '*', GLOB_ONLYDIR);
 
 	usort($folders, function($a, $b) {
-		$a = basename($a);
-		$b = basename($b);
-
-		if(str::startsWith($a, '_')) $a = str::after($a, '_');
-		if(str::startsWith($b, '_')) $b = str::after($b, '_');
-
-		return strcmp($a, $b);
+		return strcmp(
+			ltrim(basename($a), '_'),
+			ltrim(basename($b), '_')
+		);
 	});
 
 	foreach($folders as $plugin_path) :
 		if(empty($plugin_path)) continue;
 		$name = basename($plugin_path);
 		$sanitized = str_replace('_', '', $name);
+		$github = $list->github($name);
 	?>
 		<li id="plugin_<?php echo $name; ?>" class="<?php echo $list->state($name); ?>">
 			<div class="pi-row">
@@ -44,34 +42,38 @@ var base = '<?php echo u('plugin-installer/install/'); ?>';
 					<?php endif; ?>
 				</div>
 				<div class="pi-name">
-					<?php echo $sanitized; ?>
+					<?php if($github) : ?>
+						<a target="_blank" href="https://<?php echo $github; ?>">
+							<?php echo $sanitized; ?>
+						</a>
+					<?php else : ?>
+						<?php echo $sanitized; ?>
+					<?php endif; ?>
+
+					<span class="pi-version"><?php echo $list->version($plugin_path); ?></span>
 				</div>
-				<div class="pi-version">
-					<?php echo $list->version($plugin_path); ?>
-				</div>
-			</div>
-			<div class="pi-actions">
-				<a target="_top" href="<?php echo u('plugin-installer/delete/' . $name); ?>" class="btn btn-negative btn-rounded">
-					<i class="icon fa fa-trash"></i>
-				</a>
-				<?php if(!$list->isEnabled($name)) : ?>
-					<a target="_top" href="<?php echo u('plugin-installer/enable/' . $sanitized); ?>" class="btn btn-rounded">
-						<i class="icon fa fa-toggle-off"></i>
-					</a>
-				<?php endif; ?>
-				<?php if($list->isEnabled($name)) : ?>
-					<a target="_top" href="<?php echo u('plugin-installer/disable/' . $sanitized); ?>" class="btn btn-rounded">
-						<i class="icon fa fa-toggle-on"></i>
-					</a>
-				<?php endif; ?>
-				<?php if($list->github($name)) : ?>
-						<a href="<?php echo u('plugin-installer/update/' . $list->github($name)); ?>" class="btn btn-rounded">
+			
+				<div class="pi-actions">
+					<?php if($github) : ?>
+						<a target="_top" href="<?php echo u('plugin-installer/update/' . $github); ?>" class="btn btn-rounded">
 							<i class="icon fa fa-repeat"></i>
 						</a>
-						<a target="_blank" href="https://<?php echo $list->github($name); ?>" class="btn btn-rounded btn-repo">
-							<i class="icon fa fa-github"></i>
+					<?php else : ?>
+						<div class="btn pi-btn-disabled"></div>
+					<?php endif; ?>
+					<?php if(!$list->isEnabled($name)) : ?>
+						<a target="_top" href="<?php echo u('plugin-installer/enable/' . $sanitized); ?>" class="btn btn-rounded">
+							<i class="icon fa fa-toggle-off"></i>
 						</a>
-				<?php endif; ?>
+					<?php else : ?>
+						<a target="_top" href="<?php echo u('plugin-installer/disable/' . $sanitized); ?>" class="btn btn-rounded">
+							<i class="icon fa fa-toggle-on"></i>
+						</a>
+					<?php endif; ?>
+					<a target="_top" href="<?php echo u('plugin-installer/delete/' . $name); ?>" class="btn btn-negative btn-rounded">
+						<i class="icon fa fa-trash"></i>
+					</a>
+				</div>
 			</div>
 		</li>
 	<?php endforeach; ?>
