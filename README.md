@@ -2,6 +2,14 @@
 
 *Version 0.1*
 
+![](docs/screenshot.png)
+
+*`kirby-robots-writer` has been clicked on in the screenshot above*
+
+**Animation**
+
+![](docs/animation.gif)
+
 **Features**
 
 - **Install**, **update**, **delete** and **deactivate** plugins.
